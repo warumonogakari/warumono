@@ -11,13 +11,12 @@ class Cat_old:
             return -1
         
         human_age = 0  # age()メソッド内だけで使用する変数
-        match age:
-            case _ if age <= 1:
-                human_age = age * 15
-            case _ if age <= 2:
-                human_age = 15 + (age - 1) * 9
-            case _:
-                human_age = 24 + (age - 2) * 4
+        if age <= 1:
+            human_age = age * 15
+        elif age <= 2:
+            human_age = 15 + (age - 1) * 9
+        else:
+            human_age = 24 + (age - 2) * 4
         return human_age
 
 # 使用例:
