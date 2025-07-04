@@ -1,0 +1,32 @@
+[tool:pytest]
+# pytest設定ファイル
+
+# テストディスカバリー
+testpaths = .
+python_files = test_*.py
+python_classes = Test*
+python_functions = test_*
+
+# 出力設定
+addopts = 
+    -v
+    --tb=short
+    --strict-markers
+    --disable-warnings
+    --color=yes
+
+# カスタムマーカー定義
+markers =
+    unit: 単体テスト（モック使用）
+    integration: 統合テスト（実際のvcan環境必要）
+    slow: 実行時間が長いテスト
+    performance: パフォーマンステスト
+
+# テストの最小Python版
+minversion = 3.7
+
+# 並列実行設定（pytest-xdist使用時）
+# addopts に追加: -n auto
+
+# カバレッジ設定（pytest-cov使用時）
+# addopts に追加: --cov=can_core --cov-report=html --cov-report=term-missing
