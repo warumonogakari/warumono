@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(*)",
+      "Bash(python3:*)",
+      "Edit(/Users/katouhiroshi/warumono/claude_prjects/*)",
+      "Write(/Users/katouhiroshi/warumono/claude_prjects/*)",
+      "Read(/Users/katouhiroshi/warumono/claude_prjects/*)"
+    ]
+  }
+}
