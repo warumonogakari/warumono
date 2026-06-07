@@ -54,8 +54,11 @@ PT_H3,  PT_H4,  PT_BODY  = Pt(36), Pt(28), Pt(28)
 PT_H3_C, PT_H4_C, PT_BODY_C = Pt(30), Pt(22), Pt(20)
 SP_SEC, SP_ITEM = Pt(14), Pt(4)
 
+# TEMPLATE: 各スライドに流し込むデザイン（プレースホルダー配置）の供給元
 TEMPLATE_PATH = "/Users/katouhiroshi/warumono/claude_prjects/slides/template_slide.pptx"
-BASE_PATH     = "/Users/katouhiroshi/warumono/claude_prjects/slides/2026自己紹介.pptx"
+# BASE: スライドサイズ・テーマ・マスターを提供する「器」。中身スライドは init_prs() で全削除される。
+# 成果物デッキとは独立した専用ファイルにすること（デッキ移動で道連れにならないように）。
+BASE_PATH     = "/Users/katouhiroshi/warumono/claude_prjects/slides/base_theme.pptx"
 
 # スキップキーワード（**テキスト** 独立行）
 SKIP_KEYWORDS = ['写真', '地図', 'Photo', 'photo']
