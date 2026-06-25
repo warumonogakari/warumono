@@ -50,8 +50,10 @@ CONT_TOP_NORMAL        = Emu(1800000)
 CONT_BOT_WITH_QUOTE    = QUOTE_TOP - Emu(100000)
 CONT_BOT_WITHOUT_QUOTE = QUOTE_BOT
 
+PT_TITLE = Pt(40)  # スライドタイトル（テンプレート既定44ptを上書き）
 PT_H3,  PT_H4,  PT_BODY  = Pt(36), Pt(28), Pt(28)
 PT_H3_C, PT_H4_C, PT_BODY_C = Pt(30), Pt(22), Pt(20)
+PT_FOOT, PT_FOOT_C = Pt(16), Pt(14)  # 脚注（※始まりの箇条書き）
 SP_SEC, SP_ITEM = Pt(14), Pt(4)
 
 # TEMPLATE: 各スライドに流し込むデザイン（プレースホルダー配置）の供給元
@@ -88,8 +90,9 @@ def parse_slide_block(block):
     while i < len(lines):
         line = lines[i]
 
-        # スライドタイトル: ## スライドN：タイトル or ## タイトル
-        m = re.match(r'^## (?:スライド\d+[：:])?(.+)$', line)
+        # スライドタイトル: ## スライドN：タイトル / ## スライドN-M：タイトル / ## タイトル
+        # 通番（スライド1-0：等、ハイフン入りも含む）は生成時に剥がす
+        m = re.match(r'^## (?:スライド[\d\-‐－]+[：:]\s*)?(.+)$', line)
         if m:
             title = m.group(1).strip()
             i += 1
@@ -232,12 +235,11 @@ def set_title(slide, text, color=None):
             para = tf.paragraphs[0]
             if para.runs:
                 run = para.runs[0]
-                run.text = text
-                run.font.color.rgb = color
             else:
                 run = para.add_run()
-                run.text = text
-                run.font.color.rgb = color
+            run.text = text
+            run.font.color.rgb = color
+            run.font.size = PT_TITLE
             return
 
 
@@ -340,6 +342,7 @@ class ContentBuilder:
         self.fs_h3   = PT_H3_C   if compact else PT_H3
         self.fs_h4   = PT_H4_C   if compact else PT_H4
         self.fs_body = PT_BODY_C  if compact else PT_BODY
+        self.fs_foot = PT_FOOT_C  if compact else PT_FOOT
 
     def _new_para(self):
         if self._first:
@@ -368,18 +371,21 @@ class ContentBuilder:
         r.font.color.rgb = self.color
 
     def bullet(self, text):
+        # ※始まりの行は脚注扱い：小フォント・行頭の「・」なし（※自体が目印）
+        is_foot = text.startswith('※')
         p = self._new_para()
         p.space_before = Emu(int(SP_ITEM))
-        pPr = p._p.get_or_add_pPr()
-        pPr.set('marL', '457200')
-        pPr.set('indent', '-457200')
-        buClr = etree.SubElement(pPr, qn('a:buClr'))
-        clr_hex = f'{self.color[0]:02X}{self.color[1]:02X}{self.color[2]:02X}'
-        etree.SubElement(buClr, qn('a:srgbClr')).set('val', clr_hex)
-        etree.SubElement(pPr, qn('a:buChar')).set('char', '・')
+        if not is_foot:
+            pPr = p._p.get_or_add_pPr()
+            pPr.set('marL', '457200')
+            pPr.set('indent', '-457200')
+            buClr = etree.SubElement(pPr, qn('a:buClr'))
+            clr_hex = f'{self.color[0]:02X}{self.color[1]:02X}{self.color[2]:02X}'
+            etree.SubElement(buClr, qn('a:srgbClr')).set('val', clr_hex)
+            etree.SubElement(pPr, qn('a:buChar')).set('char', '・')
         r = p.add_run()
         r.text = text
-        r.font.size = self.fs_body
+        r.font.size = self.fs_foot if is_foot else self.fs_body
         r.font.color.rgb = self.color
 
     def body(self, text, bold=False):
