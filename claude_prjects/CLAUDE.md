@@ -41,7 +41,8 @@ HiroshiさんはClaudeとの会話を **知的コンバット** として捉え�
 | それ以外のディレクトリへの書き込み | 必ず確認してから実行する |
 | パッケージのバージョンが変わる操作（`uv pip install <pkg>`、`uv add`、`npm install <pkg>`、`brew upgrade` 等） | 必ず確認してから実行する |
 | lock fileに基づく再現インストール（`uv sync`、`npm ci` 等） | 自由に実行してよい |
-| git操作（add / commit / push / rebase 等） | 必ず確認してから実行する |
+| git操作（commit / push） | Claudeがスクリプトを生成 → Hiroshiさんが内容確認 → 確認後はClaudeが `bash <パス>` で実行してよい。確認済みスクリプトは実行前に編集しない（変更が要る場合は再生成・再確認）。push後の反映確認のみ実機（`!`）で行う。 |
+| git操作（その他：rebase / reset / 強制操作 等） | 必ず確認してから実行する |
 | `/zenndev` による zenn.dev への投稿 | コマンド自体が投稿の意思表示なので追加確認不要 |
 
 ## File Placement
