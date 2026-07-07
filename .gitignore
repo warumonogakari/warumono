@@ -4,3 +4,4 @@ settings.local.json
 claude_prjects/Obsidian
 claude_prjects/hotel/last_search.json
 claude_prjects/hotel/results/*.json
+.playwright-mcp/
