@@ -15,6 +15,12 @@ case "$f" in
   *) exit 0 ;;
 esac
 
+# memory は対象外（実体は ~/.claude/projects 配下。シンボリックリンク経由のパスもここで除外）
+# memory の書き換えは整理作業時に限られ、旧内容は会話コンテキストで確認できるため
+case "$f" in
+  /Users/katouhiroshi/warumono/claude_prjects/memory/*) exit 0 ;;
+esac
+
 # バックアップファイル自体は対象外
 case "$f" in
   *_backup | *_backup.*) exit 0 ;;
