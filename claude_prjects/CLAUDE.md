@@ -28,17 +28,22 @@ HiroshiさんはClaudeとの会話を **知的コンバット** として捉え�
 - Hiroshiさんが片付けを先に「片付けて」と言ってきた場合はそのまま対応する
 - `__pycache__` ディレクトリは Python 実行後に生成される常に不要な中間物なので、片付け時に確認なしで削除対象に含めてよい
 
-### settings.local.json の整理（片付け時に実施）
+### settings.local.json の整理と PERMISSIONS.md の照合（片付け時に実施）
 
 - `settings.local.json` の現在の内容を確認し、ベースライン（`settings.json` で許可済みのものや明らかに不要な断片）と比較する
 - 新たに追加されたパーミッションをHiroshiさんに提示し、残す/削除を確認してから整理する
+- `settings.json`（permissions / hooks）と `PERMISSIONS.md` の第1層・第2層の内容が一致しているか照合し、乖離があれば報告する
 
 ## 作業権限
 
+権限の全体像（3層モデル）と機械層（settings.json の permissions / hooks）の設定内容・理由は `PERMISSIONS.md` を参照。
+**権限まわりを変更する際は、先に `PERMISSIONS.md` を読み、変更と同じ作業の中で同ファイルを更新する。**
+
+`claude_prjects/` 配下の読み書きはハーネス側で許可済み（第1層）。以下は Claude の判断を要する指示（第3層）：
+
 | 操作 | 方針 |
 |---|---|
-| `/Users/katouhiroshi/warumono/claude_prjects/` 配下のファイル読み書き | 自由に実行してよい |
-| それ以外のディレクトリへの書き込み | 必ず確認してから実行する |
+| `claude_prjects/` 以外のディレクトリへの書き込み | 必ず確認してから実行する |
 | パッケージのバージョンが変わる操作（`uv pip install <pkg>`、`uv add`、`npm install <pkg>`、`brew upgrade` 等） | 必ず確認してから実行する |
 | lock fileに基づく再現インストール（`uv sync`、`npm ci` 等） | 自由に実行してよい |
 | git操作（commit / push） | Claudeがスクリプトを生成 → Hiroshiさんが内容確認 → 確認後はClaudeが `bash <パス>` で実行してよい。確認済みスクリプトは実行前に編集しない（変更が要る場合は再生成・再確認）。push後の反映確認のみ実機（`!`）で行う。 |
@@ -52,11 +57,12 @@ HiroshiさんはClaudeとの会話を **知的コンバット** として捉え�
 
 ## ファイル書き直し前のバックアップ
 
-**git管理外**のファイルを**全面書き換え・構造変更**する前に、`{元ファイル名}_backup.md` を同じフォルダに作ってから作業する。確認は不要、自動で実施する。
+**Write 経路は自動化済み**：git管理外の既存ファイルへの Write 実行前に、フックが `{元ファイル名}_backup.{拡張子}` を同フォルダに自動作成する（`PERMISSIONS.md` 第2層参照）。Claude の判断は不要。
+
+**Claude の判断が必要な残余ケース**：全面書き換え・構造変更を **Edit の連続**で行おうとしていると気づいたら、Edit ではなく Write を使う（→フックが発動する）か、先に手動でバックアップを作る。
 
 - git追跡済みのファイルは `git restore` で戻せるためバックアップ不要。
 - 局所的な追記・部分修正（差分で元が追える範囲）も不要。
-- 対象は「git管理外 × 全面書き換え・構造変更」の両方を満たす場合のみ。
 
 ## Memory → Skill 移行ルール
 
@@ -65,26 +71,7 @@ memoryファイルの内容が手順の羅列になり、3セッション以上�
 
 ## セキュリティ方針（サプライチェーン攻撃対策）
 
-2026-04-01 に確認・方針を策定。参考記事: https://zenn.dev/dely_jp/articles/supply-chain-kowai
-
-### 管理対象パッケージ
-
-| 場所 | パッケージマネージャ | 主なパッケージ |
-|---|---|---|
-| `claude_prjects/` | uv (Python) | pdf2image, pillow, playwright |
-| `warumono/` | npm | zenn-cli |
-
-### 対策状況
-
-| 対策 | 状態 | 備考 |
-|---|---|---|
-| `uv.lock` をコミット | ✅ 対応済み | `claude_prjects/` にあり |
-| `package-lock.json` をコミット | ✅ 対応済み | `warumono/` にあり |
-| npm クールダウン（`min-release-age=7`） | ✅ 対応済み・動作確認済み | `~/.npmrc` に設定済み（マシン全体に適用）。内部では `before` キーに変換されて機能するため `npm config get min-release-age` は `null` を返すが正常。`npm config list` で `before` の日付を確認できる。 |
-| uv クールダウン（`exclude-newer = "1 week"`） | ✅ 対応済み | `pyproject.toml` に設定済み |
-| 依存パッケージの更新は慎重に | ✅ 方針あり | 公開後1週間は様子見を推奨 |
-
-### 今後の方針
+対策の設定状況・管理対象パッケージの記録は `SECURITY_RECORD.md` を参照。行動ルール：
 
 - 依存パッケージをアップデートする際は、公開から **1週間以上**経過したバージョンを選ぶ
 - lock file は必ずコミットに含める

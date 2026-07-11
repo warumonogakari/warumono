@@ -2,10 +2,26 @@
   "permissions": {
     "allow": [
       "WebFetch(*)",
+      "WebSearch",
       "Bash(python3:*)",
-      "Edit(/Users/katouhiroshi/warumono/claude_prjects/*)",
-      "Write(/Users/katouhiroshi/warumono/claude_prjects/*)",
-      "Read(/Users/katouhiroshi/warumono/claude_prjects/*)"
+      "Edit(//Users/katouhiroshi/warumono/claude_prjects/**)",
+      "Write(//Users/katouhiroshi/warumono/claude_prjects/**)",
+      "Read(//Users/katouhiroshi/warumono/claude_prjects/**)",
+      "Read(//Users/katouhiroshi/Library/Mobile Documents/iCloud~md~obsidian/**)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/write_backup.sh",
+            "statusMessage": "git管理外ファイルのバックアップを確認中"
+          }
+        ]
+      }
     ]
   }
 }
