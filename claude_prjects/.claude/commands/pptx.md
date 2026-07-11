@@ -5,6 +5,10 @@
 ## 指示内容
 $ARGUMENTS
 
+## フォーマット仕様
+
+スライド用 markdown の記法・フォントサイズ・箇条書き書式は `slides/pptx_format.md` を参照する。
+
 ## 実行手順
 
 1. `python-pptx` を使って Python スクリプトを作成する
