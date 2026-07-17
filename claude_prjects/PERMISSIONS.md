@@ -32,7 +32,7 @@ CLAUDE.md（毎セッション自動で読み込まれる**指示**）に対し�
 | ルール | 理由 |
 |---|---|
 | `Read / Edit / Write (//Users/katouhiroshi/warumono/claude_prjects/**)` | 作業ディレクトリ全体。CLAUDE.md「配下は自由に読み書き」の機械的実装 |
-| `Read(//Users/katouhiroshi/Library/Mobile Documents/iCloud~md~obsidian/**)` | Obsidian ノートの参照用（読みのみ。書き込みは第3層の事前確認ルールに従う） |
+| `Read(//Users/katouhiroshi/Library/Mobile Documents/iCloud~md~obsidian/**)` | Obsidian ノートの参照用。書き込みの扱い（2026-07-17 更新）：`claude_prjects/Obsidian` は iCloud 実体へのシンボリックリンクであり、これ経由の Write は第1層の `Write(claude_prjects/**)` で機械的に通る。`Clippings/` への保管は `/obsidian` スキルの手順に従う運用で Hiroshi 了承済み。スキル外の iCloud 領域への書き込みは従来どおり第3層の事前確認に従う |
 | `Bash(python3:*)` | スクリプト実行の頻度が高い |
 | `WebFetch(*)` / `WebSearch` | 調査作業で常用 |
 
@@ -58,7 +58,7 @@ deny はサブフォルダ起動問題（下記）の影響を受けない起動
 
 **`claude_prjects` のサブフォルダから起動したセッションには、上記第1層・第2層が一切適用されない**（設定は起動ディレクトリの `.claude/` から読まれ、親ディレクトリへ遡らない）。今回のブログ作業（`blogs/スクフェス三河プロポーザルフィードバック/` 起動）で実証：Obsidian・WebFetch とも許可済みのはずがプロンプトが発生し、サブフォルダの `settings.local.json` に重複エントリが生成された。**Write前バックアップフック（第2層）も同様に効いていない**点は特に注意。対処の選択肢：(a) 常に `claude_prjects` 直下から起動する運用に統一、(b) 第1層・第2層をユーザーグローバルへ移設、(c) サブフォルダにも settings.json を複製。**当面 (a) を採用（2026-07-12 Hiroshi 決定）**——`claude` はサブフォルダでなく `claude_prjects` 直下で起動する。運用で破られうる（第3層相当の弱さ）ため、サブフォルダ起動が繰り返し起きるようなら (b) への移行を再検討する。
 
-**2026-07-14 照合時の実態**：サブフォルダの `settings.local.json` が9箇所に散在していることを確認（`blogs/`、`blogs/スクフェス三河プロポーザルフィードバック/`、`literature/`、`literature/Russia-Ukraine_War/`、`hotel/`、`hotel/results/`、`slides/`、`slides/2026年スクフェス三河/`、`.claude/.claude/`）。運用 (a) 決定より前の蓄積を含むが、サブフォルダ起動が常態化していた証拠。特に過大許可の実例：`hotel/` に `Read(//Users/katouhiroshi/.claude/**)`（credentials を含む `~/.claude` 全域の読み許可）、`.claude/.claude/` に `Bash(git:*)`（CLAUDE.md の git 確認フローを素通しする全 git 許可）——**この2エントリは同日 Hiroshi 確認のうえ削除済み**。残る9ファイル自体の整理は片付け時に実施する。
+**2026-07-14 照合時の実態**：サブフォルダの `settings.local.json` が9箇所に散在していることを確認（`blogs/`、`blogs/スクフェス三河プロポーザルフィードバック/`、`literature/`、`literature/Russia-Ukraine_War/`、`hotel/`、`hotel/results/`、`slides/`、`slides/2026年スクフェス三河/`、`.claude/.claude/`）。運用 (a) 決定より前の蓄積を含むが、サブフォルダ起動が常態化していた証拠。特に過大許可の実例：`hotel/` に `Read(//Users/katouhiroshi/.claude/**)`（credentials を含む `~/.claude` 全域の読み許可）、`.claude/.claude/` に `Bash(git:*)`（CLAUDE.md の git 確認フローを素通しする全 git 許可）——**この2エントリは同日 Hiroshi 確認のうえ削除済み**。残る9ファイル自体の整理は片付け時に実施する。→ **2026-07-14夜の片付けで確認：9ファイルはすべて消えており（サブフォルダの `.claude/` ディレクトリごと不存在）、整理完了。**
 
 ## 第2層：フック（settings.json の hooks と同期）
 
