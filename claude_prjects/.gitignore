@@ -1,0 +1,5 @@
+# crit のローカルレビュー状態（インラインコメントの JSON）
+.crit/
+
+# 調査・作業メモ（git 管理しない方針。2026-07-18 Hiroshi さん決定）
+tech_research/

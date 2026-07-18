@@ -12,6 +12,7 @@
 |---|---|---|
 | `claude_prjects/` | uv (Python) | pdf2image, pillow, playwright |
 | `warumono/` | npm | zenn-cli |
+| マシン全体 | brew | crit 0.18.0（2026-07-18 導入、公開1週間ルール充足を確認の上 `HOMEBREW_NO_AUTO_UPDATE=1` で導入。経緯は `tech_research/crit.md調査とインストール改善記録.md`） |
 
 ### 対策状況
 
