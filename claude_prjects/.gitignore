@@ -1,5 +1,6 @@
 # crit のローカルレビュー状態（インラインコメントの JSON）
 .crit/
 
-# 調査・作業メモ（git 管理しない方針。2026-07-18 Hiroshi さん決定）
-tech_research/
+# 調査・作業メモは git 管理しない（フォルダ自体は .gitkeep で残す。2026-07-18 Hiroshi さん決定）
+tech_research/*
+!tech_research/.gitkeep
