@@ -31,8 +31,8 @@ CLAUDE.md（毎セッション自動で読み込まれる**指示**）に対し�
 
 | ルール | 理由 |
 |---|---|
-| `Read / Edit / Write (//Users/katouhiroshi/warumono/claude_prjects/**)` | 作業ディレクトリ全体。CLAUDE.md「配下は自由に読み書き」の機械的実装 |
-| `Read(//Users/katouhiroshi/Library/Mobile Documents/iCloud~md~obsidian/**)` | Obsidian ノートの参照用。書き込みの扱い（2026-07-17 更新）：`claude_prjects/Obsidian` は iCloud 実体へのシンボリックリンクであり、これ経由の Write は第1層の `Write(claude_prjects/**)` で機械的に通る。`Clippings/` への保管は `/obsidian` スキルの手順に従う運用で Hiroshi 了承済み。スキル外の iCloud 領域への書き込みは従来どおり第3層の事前確認に従う |
+| `Read / Edit (//Users/katouhiroshi/warumono/claude_prjects/**)` | 作業ディレクトリ全体。CLAUDE.md「配下は自由に読み書き」の機械的実装。`Edit` ルールは Write を含む全ファイル編集系ツールをカバーするため `Write` ルールは不要（2026-07-21 判明：`Write(...)` は permission checks にマッチしない起動時警告が出ていたため削除） |
+| `Read(//Users/katouhiroshi/Library/Mobile Documents/iCloud~md~obsidian/**)` | Obsidian ノートの参照用。書き込みの扱い（2026-07-17 更新）：`claude_prjects/Obsidian` は iCloud 実体へのシンボリックリンクであり、これ経由の Write は第1層の `Edit(claude_prjects/**)` で機械的に通る。`Clippings/` への保管は `/obsidian` スキルの手順に従う運用で Hiroshi 了承済み。スキル外の iCloud 領域への書き込みは従来どおり第3層の事前確認に従う |
 | `Bash(python3:*)` | スクリプト実行の頻度が高い |
 | `WebFetch(*)` / `WebSearch` | 調査作業で常用 |
 
