@@ -1,6 +1,6 @@
 """
 汎用 Markdown → PDF 変換エンジン
-使用方法: uv run python md_to_html_core.py <input.md> <output.pdf>
+使用方法: uv run python md_to_pdf.py <input.md> <output.pdf>
 拡張方法: extra_line_rules / extra_inline_rules / extra_css を渡して対話形式などに対応
 """
 import sys
@@ -202,6 +202,6 @@ def convert(
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("使用方法: uv run python md_to_html_core.py <input.md> <output.pdf>")
+        print("使用方法: uv run python md_to_pdf.py <input.md> <output.pdf>")
         sys.exit(1)
     convert(sys.argv[1], sys.argv[2])
