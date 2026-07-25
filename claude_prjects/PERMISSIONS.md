@@ -35,6 +35,7 @@ CLAUDE.md（毎セッション自動で読み込まれる**指示**）に対し�
 | `Read(//Users/katouhiroshi/Library/Mobile Documents/iCloud~md~obsidian/**)` | Obsidian ノートの参照用。書き込みの扱い（2026-07-17 更新）：`claude_prjects/Obsidian` は iCloud 実体へのシンボリックリンクであり、これ経由の Write は第1層の `Edit(claude_prjects/**)` で機械的に通る。`Clippings/` への保管は `/obsidian` スキルの手順に従う運用で Hiroshi 了承済み。スキル外の iCloud 領域への書き込みは従来どおり第3層の事前確認に従う |
 | `Bash(python3:*)` | スクリプト実行の頻度が高い |
 | `WebFetch(*)` / `WebSearch` | 調査作業で常用 |
+| `mcp__playwright__browser_navigate` / `browser_evaluate` / `browser_wait_for` | crit のブラウザインラインレビューで毎回使う3件。第1層に無いと `/review` のたびに許可ダイアログが出て `settings.local.json` に断片が再生成され、片付けで消しても翌週また湧く（2026-07-25 昇格）。ページ遷移・待機・評価に限定し、`browser_click` 等の操作系は昇格させていない |
 
 注意：Bash 経由のファイル操作（`mv`、`cp`、リダイレクト等）は `Edit/Write` ルールではカバーされない別レール。頻出コマンドの確認が煩わしくなったら `Bash(mv:*)` 等の個別ルール追加か `/fewer-permission-prompts` を検討する。
 
