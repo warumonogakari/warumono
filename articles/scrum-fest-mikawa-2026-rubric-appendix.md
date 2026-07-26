@@ -6,7 +6,7 @@ topics: ["スクラム", "アジャイル", "コミュニティ", "プロポー�
 published: true
 ---
 
-スクラムフェス三河のプロポーザルに応援フィードバックを送るために作った、ルーブリックの全文です。何のために作って、当ててみて何がわかったかは[前編](https://zenn.dev/warumonogakari/articles/scrum-fest-mikawa-2026-rubric-1)に書きました。
+スクラムフェス三河のプロポーザルに応援フィードバックを送るために作った、ルーブリックの全文です。何のために作って、適用してみて何がわかったかは[前編](https://zenn.dev/warumonogakari/articles/scrum-fest-mikawa-2026-rubric-1)に書きました。
 
 ## ルーブリック全文（7観点×記述語）
 
