@@ -6,7 +6,7 @@ topics: ["スクラム", "アジャイル", "コミュニティ", "プロポー�
 published: true
 ---
 
-スクラムフェス三河のプロポーザルに応援フィードバックを送るために作った、ルーブリックの全文です。何のために作って、適用してみて何がわかったかは[前編](https://zenn.dev/warumonogakari/articles/scrum-fest-mikawa-2026-rubric-1)に書きました。
+スクラムフェス三河のプロポーザルに応援フィードバックを送るために作った、ルーブリックの全文です。何のために作って、適用してみて何がわかったかは[前編](https://zenn.dev/warumonogakari/articles/scrum-fest-mikawa-2026-rubric-1)に、フィードバックを送ったあとに何が起きたかは[後編](https://zenn.dev/warumonogakari/articles/scrum-fest-mikawa-2026-rubric-2)に書きました。
 
 ## ルーブリック全文（7観点×記述語）
 
@@ -30,7 +30,7 @@ published: true
 下敷きにした文献は次の2つです。
 
 - Engeström, Y. (2026). Cultural–Historical Activity Theory and Educational Change: Formative Interventions Toward a Zone of Proximal Development. In A. L. Goodwin et al. (eds.), *Third International Handbook of Educational Change*. Springer Nature Switzerland. [DOI: 10.1007/978-3-031-88898-4_20-1](https://doi.org/10.1007/978-3-031-88898-4_20-1) — 矛盾の階層、拡張的学習サイクル、二重刺激
-- Rantavuori, P. (2025). *Adolescents Gaining Power: A Change Laboratory in a School Setting*. Tampere University Dissertations 1347. ISBN 978-952-03-4176-3（[Trepo でオープンアクセス](http://urn.fi/URN:ISBN:978-952-03-4176-3)） — 「力は一般的な性質ではなく、特定の対象への行為の中から生まれる」という定式化。観点2-3の下敷き
+- Rantavuori, P. (2025). *Adolescents Gaining Power: A Change Laboratory in a School Setting*. Tampere University Dissertations 1347. ISBN 978-952-03-4176-3（[Trepo でオープンアクセス](https://trepo.tuni.fi/handle/10024/231299)） — 「力は一般的な性質ではなく、特定の対象への行為の中から生まれる」という定式化。観点2-3の下敷き
 
 ### 判定の心得
 
