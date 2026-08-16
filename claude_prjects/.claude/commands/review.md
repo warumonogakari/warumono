@@ -29,7 +29,7 @@ Hiroshi さんのレビュー要求を、crit スキルによるインライン�
 
 ## 日本語表現の好みの蓄積
 
-蓄積先：`Obsidian/Documents/Obsidian/Clippings/日本語表現の好み.md`
+蓄積先：`claude_prjects/Obsidian/Documents/Obsidian/Clippings/日本語表現の好み.md`
 
 承認後、今回のレビューコメントを見直して以下を行う。
 
