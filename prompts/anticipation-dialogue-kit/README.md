@@ -55,13 +55,18 @@ example_manufacturing/         # 記入例: 伝統的製造業・大部屋開発
 ├── public_context.md
 └── sheets/                    # 配役7枚（フル/核のみ/ほぼ白紙の書き込み量の例）
 
+example_robot_maker/           # 記入例: ロボットメーカー・スクラムと日程表がぶつかるケース（刈谷製作所編）
+├── system_map.md
+├── public_context.md
+└── sheets/                    # 配役6枚（チーム内4人・支援者2人）
+
 HOWTO.md                       # ケースの作り方と実行手順
 ```
 
 ## 使い方（概要）
 
 1. `HOWTO.md` に従い、`templates/` を埋めて自分のケース（システム図・公開情報・
-   内面シート）を作る。`example_manufacturing/` が記入例
+   内面シート）を作る。`example_manufacturing/` と `example_robot_maker/` が記入例
 2. メインセッション（演出家）が `facilitation_guide.md` の手順で配役エージェントを
    起動し、ターン制で対話を進行。発話は逐語録に追記していく
 3. 生成後、`test_checklist.md` でテストし、テストの結果、不自然な表現があれば局所修復
